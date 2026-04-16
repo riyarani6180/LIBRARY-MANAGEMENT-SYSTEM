@@ -3,41 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Book Reader</title>
-    <link rel="stylesheet" href="style.css">
+    <title>BookNest • Read More</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8f4f0 0%, #e8e0d4 100%);
+            color: #2c2218;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #d4c3a8;
+        }
+        
+        nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8b5a2b;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #4a3f35;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #8b5a2b;
+        }
+        
+        .hero {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: #2c2218;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #5c5348;
+            margin-bottom: 2rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(139, 90, 43, 0.15);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: #8b5a2b;
+            color: white;
+            border: none;
+            padding: 0 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #6d4622;
+            transform: translateY(-2px);
+        }
+        
+        .featured {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2c2218;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 90, 43, 0.2);
+        }
+        
+        .book-cover {
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .book-info {
+            padding: 1rem;
+        }
+        
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .book-author {
+            color: #8b5a2b;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background: #2c2218;
+            color: #d4c3a8;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 4rem 1rem 3rem;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav>
-            <h1>OpenLibrary Reader</h1>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
+            <a href="#" class="logo">BookNest</a>
+            <ul class="nav-links">
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Browse</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">My Library</a></li>
             </ul>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button style="background: none; border: 2px solid #8b5a2b; color: #8b5a2b; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 500;">Sign In</button>
+                <button style="background: #8b5a2b; color: white; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 500;">Join Free</button>
+            </div>
         </nav>
     </header>
 
-    <main class="reader-container">
-        <aside class="sidebar">
-            <h3>Chapters</h3>
-            <ul>
-                <li><a href="#ch1">Chapter 1: The Beginning</a></li>
-                <li><a href="#ch2">Chapter 2: The Journey</a></li>
-                <li><a href="#ch3">Chapter 3: The Climax</a></li>
-            </ul>
-        </aside>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find your next great read</h1>
+            <p>Millions of books. One beautiful place to read. Join a community that loves stories as much as you do.</p>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search by title, author, or genre...">
+                <button>Search</button>
+            </div>
+            
+            <p style="margin-top: 2rem; font-size: 1rem; color: #6b5a4a;">
+                Popular today: <strong>The Midnight Library</strong>, <strong>Dune</strong>, <strong>Project Hail Mary</strong>
+            </p>
+        </div>
+        
+        <!-- Visual side -->
+        <div style="position: relative; display: flex; justify-content: center;">
+            <div style="position: relative; width: 320px; height: 420px; transform: rotate(-8deg); box-shadow: 0 30px 60px rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; background: url('https://picsum.photos/id/1015/800/1000') center/cover;">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 1.5rem 1rem; font-size: 1.1rem;">
+                    <strong>Currently Reading</strong><br>
+                    The Housemaid
+                </div>
+            </div>
+            <div style="position: absolute; top: 60px; right: -40px; width: 280px; height: 380px; transform: rotate(6deg); box-shadow: 0 30px 60px rgba(0,0,0,0.25); border-radius: 8px; background: url('https://picsum.photos/id/201/800/1000') center/cover;"></div>
+        </div>
+    </section>
 
-        <section class="reading-area">
-            <article id="ch1">
-                <h2>Chapter 1: The Beginning</h2>
-                <p>Your book content starts here. Use clear, legible fonts for the best reading experience...</p>
-                <p>Adding more paragraphs helps simulate a real reading environment.</p>
-            </article>
-        </section>
-    </main>
+    <!-- Featured Books -->
+    <section class="featured">
+        <h2 class="section-title">Featured This Week</h2>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover" style="background-image: url('https://picsum.photos/id/1015/600/800')"></div>
+                <div class="book-info">
+                    <div class="book-title">The Midnight Library</div>
+                    <div class="book-author">Matt Haig</div>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover" style="background-image: url('https://picsum.photos/id/201/600/800')"></div>
+                <div class="book-info">
+                    <div class="book-title">Project Hail Mary</div>
+                    <div class="book-author">Andy Weir</div>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover" style="background-image: url('https://picsum.photos/id/133/600/800')"></div>
+                <div class="book-info">
+                    <div class="book-title">The Silent Patient</div>
+                    <div class="book-author">Alex Michaelides</div>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover" style="background-image: url('https://picsum.photos/id/251/600/800')"></div>
+                <div class="book-info">
+                    <div class="book-title">Educated</div>
+                    <div class="book-author">Tara Westover</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 My Reading Website</p>
+        <p style="font-size: 1.4rem; margin-bottom: 1rem;">BookNest</p>
+        <p>© 2026 • A place for book lovers</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">Made with ❤️ for readers everywhere</p>
     </footer>
 </body>
 </html>
