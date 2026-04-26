@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>PageTurn Library</display-name>
+
+    <!-- ── BooksServlet ── -->
+    <servlet>
+        <servlet-name>BooksServlet</servlet-name>
+        <servlet-class>com.library.servlets.BooksServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BooksServlet</servlet-name>
+        <url-pattern>/BooksServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── LoginServlet ── -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.library.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── SignupServlet ── -->
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>com.library.servlets.SignupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/SignupServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── ReserveBookServlet ── -->
+    <servlet>
+        <servlet-name>ReserveBookServlet</servlet-name>
+        <servlet-class>com.library.servlets.ReserveBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReserveBookServlet</servlet-name>
+        <url-pattern>/ReserveBookServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default page when someone visits the root URL -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+</web-app>
