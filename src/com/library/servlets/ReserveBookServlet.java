@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/ReserveBookServlet")
 public class ReserveBookServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +40,7 @@ public class ReserveBookServlet extends HttpServlet {
             ps.close();
             conn.close();
 
-            request.setAttribute("success", "Book reserved successfully!");
-            request.getRequestDispatcher("index.html").forward(request, response);
+            response.sendRedirect("index.jsp?reserved=true");
 
         } catch (Exception e) {
             request.setAttribute("error", "Something went wrong");

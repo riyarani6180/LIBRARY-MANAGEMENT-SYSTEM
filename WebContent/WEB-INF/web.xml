@@ -7,7 +7,6 @@
 
     <display-name>PageTurn Library</display-name>
 
-    <!-- ── BooksServlet ── -->
     <servlet>
         <servlet-name>BooksServlet</servlet-name>
         <servlet-class>com.library.servlets.BooksServlet</servlet-class>
@@ -17,7 +16,15 @@
         <url-pattern>/BooksServlet</url-pattern>
     </servlet-mapping>
 
-    <!-- ── LoginServlet ── -->
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>com.library.servlets.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/CategoryServlet</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.library.servlets.LoginServlet</servlet-class>
@@ -27,7 +34,6 @@
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
 
-    <!-- ── SignupServlet ── -->
     <servlet>
         <servlet-name>SignupServlet</servlet-name>
         <servlet-class>com.library.servlets.SignupServlet</servlet-class>
@@ -37,7 +43,6 @@
         <url-pattern>/SignupServlet</url-pattern>
     </servlet-mapping>
 
-    <!-- ── ReserveBookServlet ── -->
     <servlet>
         <servlet-name>ReserveBookServlet</servlet-name>
         <servlet-class>com.library.servlets.ReserveBookServlet</servlet-class>
@@ -47,9 +52,18 @@
         <url-pattern>/ReserveBookServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.library.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- Default page when someone visits the root URL -->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

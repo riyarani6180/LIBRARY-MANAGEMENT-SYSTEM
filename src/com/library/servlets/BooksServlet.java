@@ -7,12 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/BooksServlet")
 public class BooksServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,20 +19,31 @@ public class BooksServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
+        String search = request.getParameter("search");
 
         try {
             Connection conn = DBConnection.getConnection();
+            PreparedStatement ps;
             
-            String sql;
-            if (action != null && action.equals("featured")) {
-                sql = "SELECT * FROM books ORDER BY RANDOM() LIMIT 6";
-            } else if (action != null && action.equals("latest")) {
-                sql = "SELECT * FROM books ORDER BY added_on DESC LIMIT 4";
+            if (search != null && !search.trim().isEmpty()) {
+                String sql = "SELECT * FROM books WHERE title ILIKE ? OR author ILIKE ? OR genre ILIKE ?";
+                ps = conn.prepareStatement(sql);
+                String term = "%" + search.trim() + "%";
+                ps.setString(1, term);
+                ps.setString(2, term);
+                ps.setString(3, term);
             } else {
-                sql = "SELECT * FROM books ORDER BY added_on DESC";
+                String sql;
+                if (action != null && action.equals("featured")) {
+                    sql = "SELECT * FROM books ORDER BY RANDOM() LIMIT 6";
+                } else if (action != null && action.equals("latest")) {
+                    sql = "SELECT * FROM books ORDER BY added_on DESC LIMIT 4";
+                } else {
+                    sql = "SELECT * FROM books ORDER BY added_on DESC";
+                }
+                ps = conn.prepareStatement(sql);
             }
             
-            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             out.print("[");
@@ -43,7 +52,8 @@ public class BooksServlet extends HttpServlet {
                 if (count > 0) out.print(",");
                 out.print("{\"id\":" + rs.getInt("id") + ",\"title\":\"" + rs.getString("title") + 
                     "\",\"author\":\"" + rs.getString("author") + "\",\"genre\":\"" + rs.getString("genre") + 
-                    "\",\"type\":\"" + rs.getString("type") + "\",\"coverUrl\":\"" + rs.getString("cover_url") + "\"}");
+                    "\",\"type\":\"" + rs.getString("type") + "\",\"available\":" + rs.getBoolean("available") + 
+                    ",\"coverUrl\":\"" + rs.getString("cover_url") + "\"}");
                 count++;
             }
             out.print("]");
